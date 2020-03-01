@@ -17,7 +17,7 @@ class App extends React.Component {
 
     getApiData = () => {
         let api = this.state.baseUrl;
-        for (var i = 0; i < 4; i++) {
+        for (var i = 0; i < 6; i++) {
             fetch(api)
                 .then(response => response.json())
                 .then(data => data.url)
@@ -32,19 +32,16 @@ class App extends React.Component {
                     return [url, ""];
                 })
                 .then(result => { // (**)
-                        if (result[1]) {
+                        if ((result[1]) && (this.state.list1.length < 4)) {
                             this.setState({
                                 list1: this.state.list1.concat([result[0]]),
                                 // test: result[1]
                             })
-                        }
-                        else {
-                            i--;
                         }
                     }
                 )
         }
-        for (var i = 0; i < 4; i++) {
+        for (var i = 0; i < 6; i++) {
             fetch(api)
                 .then(response => response.json())
                 .then(data => data.url)
@@ -59,14 +56,11 @@ class App extends React.Component {
                     return [url, ""];
                 })
                 .then(result => { // (**)
-                        if (result[1]) {
+                    if ((result[1]) && (this.state.list2.length < 4)) {
                             this.setState({
-                                list1: this.state.list1.concat([result[0]]),
+                                list2: this.state.list2.concat([result[0]]),
                                 // test: result[1]
                             })
-                        }
-                        else {
-                            i--;
                         }
                     }
                 )
