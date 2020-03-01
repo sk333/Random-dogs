@@ -1,7 +1,7 @@
 # Random-dogs
 
 Created with [Create React App](https://github.com/facebookincubator/create-react-app) and [Bootstrap](https://github.com/twbs/bootstrap).
-
+Using an API [https://random.dog/woof.json](https://random.dog/woof.json) which can return a random image of dogs.
 
 ## Run the app
 
