@@ -10,7 +10,7 @@ class App extends React.Component {
             list1: [],
             list2: [],
             type1: [],
-            baseUrl: 'https://random.dog/woof.json',    //这里创建urls保存接口的路径，后面img标签调用图片用到
+            baseUrl: 'https://random.dog/woof.json',
             availableTypes: ["mp4", "MP4", "JPG", "jpg", "gif", "GIF", "JPEG", "jpeg", "png", "PNG"],
             test: ""
         }
@@ -19,42 +19,37 @@ class App extends React.Component {
     getApiData = () => {
         let api = this.state.baseUrl;
         for (var i = 0; i < 4; i++) {
-            // fetch(api)
-            //     .then(response => response.json())
-            //     .then(data => data.url)
-            //     .then(function(url)  {
-            //         this.setState({
-            //             test: "keyidaozhelio",
-            //         });
-            //         let type = "";
-            //         let index = 0;
-            //         let judgement = true;
-            //         index = url.lastIndexOf(".");
-            //         type  = url.substring(index + 1, url.length);
-            //         if(this.state.availableTypes.includes(type)){
-            //
-            //             return {type:url, b:500, color:"white"}[url,true];
-            //         }
-            //         return [url,false];
-            //     })
-            //     .then(function(result) { // (**)
-            //             if(result[1]){
-            //                 this.setState({
-            //                     list1: this.state.list1.concat([result[0]]),
-            //                     test: result
-            //                 })
-            //             }
-            //             else{
-            //                 i--;
-            //             }
-            //         }
-            //     )
             fetch(api)
                 .then(response => response.json())
                 .then(data => data.url)
-                .then(img => this.setState({
-                    list1: this.state.list1.concat([img]),
-                }))
+                .then(url => {
+                    let type = "";
+                    let index = 0;
+                    index = url.lastIndexOf(".");
+                    type  = url.substring(index + 1, url.length);
+                    if(this.state.availableTypes.includes(type)){
+                        return [url,"true"];
+                    }
+                    return [url,""];
+                })
+                .then(result=> { // (**)
+                        if(result[1]){
+                            this.setState({
+                                list1: this.state.list1.concat([result[0]]),
+                                // test: result[1]
+                            })
+                        }
+                        else{
+                            i--;
+                        }
+                    }
+                )
+            // fetch(api)
+            //     .then(response => response.json())
+            //     .then(data => data.url)
+            //     .then(img => this.setState({
+            //         list1: this.state.list1.concat([img]),
+            //     }))
         }
 
         for (var i = 0; i < 4; i++) {
@@ -114,7 +109,6 @@ class App extends React.Component {
                 <div class="row clearfix">
                   <div class="col-md-12 column">
                     <div class="row clearfix">
-                        <h1 id="hereiam">{this.state.test}</h1>
                         {
                             list1
                             }
